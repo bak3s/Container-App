@@ -8,6 +8,7 @@ class CylindricalParcel < Parcel
   end
 
   def volume
-    Math.PI * (@radius**2) * @height
+#    Math.PI * (@radius**2) * @height
+    3.142 * @radius * @radius * @height
   end
 end
