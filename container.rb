@@ -22,10 +22,24 @@ class Container
       puts 'Nothing to remove'
       return nil
     end
-    puts 'Select id of parcel to remove from the following list'
-    puts 'Press Enter key to remove nothing'
-    @parcels.each {|parcel| puts parcel.id}
-    gets.chomp
+    puts 'Select index of parcel to remove'
+    puts 'Enter 0 or a non-integer to remove nothing'
+    @parcels.each_with_index do |parcel, index|
+      puts "Parcel id #{parcel.id}  Index: #{index+1}"
+    end
+    selection = -1
+    while selection < 0 || selection > @parcels.size
+      selection = gets.chomp.to_i
+      if selection < 0 || selection > @parcels.size
+        puts 'Invalid Entry, try again'
+      end
+    end
+    if selection == 0
+      return nil
+    end
+    
+    parcel = @parcels[selection-1]
+    parcel.id
   end
   
   def find_parcel_from_id(id)
@@ -40,7 +54,7 @@ class Container
     @parcels.delete(parcel)
     update_volume
   end
-
+  
   def update_volume
     @remaining_volume = @volume - @parcels.inject(0){|sum,parcel| sum + parcel.volume}
   end
