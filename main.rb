@@ -2,6 +2,7 @@ require './container'
 require './parcel'
 require './cuboidal_parcel'
 require './cylindrical_parcel'
+require 'securerandom'
 
 def enter_positive_integer(prompt, error_message)
   puts prompt
@@ -76,13 +77,8 @@ def add_cylindrical_parcel(container)
 end
 
 def enter_id(container)
-  puts 'Enter the id'
-  id = gets.chomp
-  while container.id_taken?(id)
-    puts 'Sorry, that id is already taken.  Enter again'
-    id = gets.chomp
-  end
-  id
+  id = SecureRandom.hex
+  puts "Generated Parcel ID #{id}"
 end
 
 container = Container.new(enter_container_volume)
