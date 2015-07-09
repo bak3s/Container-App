@@ -79,6 +79,7 @@ end
 def enter_id(container)
   id = SecureRandom.hex
   puts "Generated Parcel ID #{id}"
+  id
 end
 
 container = Container.new(enter_container_volume)
